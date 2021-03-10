@@ -1,7 +1,7 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {  
-    safeCall('themeEditor',function(obj) {
+    safeCall('emailEditor',function(obj) {
         obj.initRows();
     },true);   
 }); 

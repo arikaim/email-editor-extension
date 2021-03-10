@@ -3,11 +3,9 @@
 arikaim.component.onLoaded(function() {  
     var theme = $('#theme').val();
     var componentName = $('#component_name').val();
-    var type = $('#type').val();
-
-    editorControlPanel.loadComponentFile(theme,componentName,type,function(result) {          
-        themeEditor.loadCodeEditor(result.content,function() {
-            console.log('remove');
+   
+    emailEditorApi.loadEmailFile(theme,componentName,function(result) {          
+        emailEditor.loadCodeEditor(result.content,function() {        
             $('#code_loader').remove();
         });                     
     },function(error) {

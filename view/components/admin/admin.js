@@ -18,7 +18,7 @@ function EmailEditorApi() {
         return arikaim.put('/api/email/admin/file/load',data,onSuccess,onError);
     };   
     
-    this.saveComponentFile = function(theme, componentName, content, onSuccess, onError) {    
+    this.saveEmailFile = function(theme, componentName, content, onSuccess, onError) {    
         var data = {
             theme: theme,
             component: componentName,   

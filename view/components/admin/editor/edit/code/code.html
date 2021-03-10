@@ -1,5 +1,5 @@
 {% set template = package('template').createPackage(theme_name) %}
-{% set component_path = template.getComponentPath(theme_component,type) %}
+{% set component_path = template.getComponentPath(theme_component,'emails') %}
 <div class="ui horizontal segments">
     <div class="ui segment">
         {% if demo_mode != true %}

@@ -1,6 +1,7 @@
 {
     "labels": {
         "save": "Save",
+        "edit": "Edit",
         "code": "Code",
         "tags": "Meta Tags",
         "demo": "Disabled in demo mode"
