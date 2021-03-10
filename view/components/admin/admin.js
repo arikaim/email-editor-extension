@@ -6,50 +6,35 @@
  */
 'use strict';
 
-function EditorControlPanel() {
+function EmailEditorApi() {
     this.editor = null;
 
-    this.loadComponentFile = function(theme, componentName, type, onSuccess, onError) {
+    this.loadEmailFile = function(theme, componentName, onSuccess, onError) {
         var data = {
             theme: theme,
-            component: componentName,         
-            type: type
+            component: componentName        
         };
 
-        return arikaim.put('/api/editor/admin/load/component/file',data,onSuccess,onError);
+        return arikaim.put('/api/email/admin/file/load',data,onSuccess,onError);
     };   
     
-    this.saveComponentFile = function(theme, componentName, type, content, onSuccess, onError) {    
+    this.saveComponentFile = function(theme, componentName, content, onSuccess, onError) {    
         var data = {
             theme: theme,
             component: componentName,   
-            content: content,     
-            type: type
+            content: content    
         };
 
-        return arikaim.put('/api/editor/admin/save/component/file',data,onSuccess,onError);
+        return arikaim.put('/api/email/admin/file/save',data,onSuccess,onError);
     }; 
 
-    this.savePageMetaTags = function(formId, onSuccess, onError) {    
-        return arikaim.put('/api/editor/admin/save/pages/metatags',formId,onSuccess,onError);
-    }; 
-
-    this.setStatus = function(uuid, status, onSuccess, onError) { 
-        var data = { 
-            status: status,
-            uuid: uuid 
-        };
-        
-        return arikaim.put('/api/editor/admin/pages/status',data,onSuccess,onError);           
-    };
-    
     this.init = function() {
         arikaim.ui.tab();        
     };
 }
 
-var editorControlPanel = new EditorControlPanel();
+var emailEditorApi = new EmailEditorApi();
 
 arikaim.component.onLoaded(function() {
-    editorControlPanel.init();
+    emailEditorApi.init();
 });

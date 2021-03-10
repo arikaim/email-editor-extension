@@ -6,7 +6,7 @@
  */
 'use strict';
 
-function ThemeEditor() {
+function EmailEditor() {
     var self = this;
 
     this.loadCodeEditor = function(code, onSuccess) {
@@ -31,10 +31,10 @@ function ThemeEditor() {
         });                              
     };
 
-    this.loadThemeEdit = function(theme) {
+    this.loadEmailsEdit = function(theme) {
         arikaim.page.loadContent({
             id: 'editor',
-            component: "editor::admin.editor.menu",
+            component: "email::admin.editor.content",
             params: { 
                 theme_name: theme
             },
@@ -47,7 +47,7 @@ function ThemeEditor() {
     this.init = function() {
         $('#templates_dropdown').dropdown({
             onChange: function(name) {
-                self.loadThemeEdit(name);                
+                self.loadEmailsEdit(name);                
             }
         });              
     };
@@ -55,7 +55,7 @@ function ThemeEditor() {
     this.editFile = function(theme, componentName, type) {
         arikaim.page.loadContent({
             id: 'edit_file',
-            component: 'editor::admin.editor.edit',
+            component: 'email::admin.editor.edit',
             params: { 
                 theme_name: theme,
                 component_name: componentName,
@@ -64,33 +64,7 @@ function ThemeEditor() {
         });
     };
 
-    this.loadChildComponents = function(theme, parent, id, type) {          
-
-        arikaim.page.loadContent({
-            id: 'components_content_' + id,
-            component: 'editor::admin.editor.content.' + type,
-            params: { 
-                theme_name: theme,
-                parent_component: parent,               
-                type: type
-            }
-        },function(result) {
-            self.initRows();
-        });
-    };
-
     this.initRows = function() {
-
-        arikaim.ui.button('.load-child-components',function(element) {
-            var parent = $(element).attr('parent');
-            var type = $(element).attr('type');
-            var theme = $(element).attr('theme');
-            var id = $(element).attr('component-id');
-            $('#components_content_' + id).show();
-            
-            return self.loadChildComponents(theme,parent,id,type);
-        });
-
         arikaim.ui.button('.edit-file',function(element) {
             var theme = $(element).attr('theme');
             var type = $(element).attr('type');
@@ -106,8 +80,8 @@ function ThemeEditor() {
     };
 }
 
-var themeEditor = new ThemeEditor();
+var emailEditor = new EmailEditor();
 
 arikaim.component.onLoaded(function() {
-    themeEditor.init();    
+    emailEditor.init();    
 });

@@ -16,9 +16,8 @@
     {% for file in components %}       
         {% set child_components = template.getEmails(file.full_name) %}  
         {% set path = template.getComponentPath(file.full_name)  %}
-        <div class="item">           
-            <i class="mail outline icon"></i>              
-            <div class="content">  
+        <div class="item">                             
+            <div class="content">               
                 <div class="right floated content">                       
                     <button 
                         class="ui mini icon basic compact button edit-file right floated" 
@@ -27,25 +26,14 @@
                         component-id="{{ file.id }}"  
                         theme="{{ theme_name }}" 
                         title="{{ labels.edit }}">
-                        <i class="icon blue code"></i>
+                        <i class="icon blue edit"></i>
                     </button>    
                 </div>    
-                <div class="header">
-                    {% if child_components|length > 0 %}
-                        <a class="load-child-components" 
-                            component-id="{{ file.id }}" 
-                            parent="{{ file.full_name }}" 
-                            theme="{{ theme_name }}" 
-                            type="emails">
-                            <span id="component_title_{{ file.id }}" class="ui text component-title">
-                                {{ file.name }}  
-                            </span>                            
-                        </a>
-                    {% else %}  
-                        <span id="component_title_{{ file.id }}" class="ui text component-title">
-                            {{ file.name }}   
-                        </span>                        
-                    {% endif %} 
+                <div class="header">       
+                    <i class="mail outline icon"></i>                  
+                    <span id="component_title_{{ file.id }}" class="ui text component-title">
+                        {{ file.name }}   
+                    </span>                                           
                 </div>               
                 <div id="components_content_{{ file.id }}" class="mt-1 mb-1 hidden pl-1 pr-0">
                 </div>

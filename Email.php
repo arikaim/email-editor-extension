@@ -24,8 +24,8 @@ class Email extends Extension
     public function install()
     {
         // Control Panel
-        $this->addApiRoute('PUT','/api/email/admin/load/email/file','EmailControlPanel','loadEmailFile','session'); 
-        $this->addApiRoute('PUT','/api/editor/admin/save/email/file','EmailControlPanel','saveEmailFile','session');   
+        $this->addApiRoute('PUT','/api/email/admin/file/load','EmailControlPanel','loadEmailFile','session'); 
+        $this->addApiRoute('PUT','/api/editor/admin/file/save','EmailControlPanel','saveEmailFile','session');   
     }
     
     /**

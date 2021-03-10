@@ -8,7 +8,7 @@ arikaim.component.onLoaded(function() {
 
             arikaim.page.loadContent({
                 id: 'meta_tags_content',
-                component: 'editor::admin.editor.edit.meta.form',
+                component: 'email::admin.editor.edit.meta.form',
                 params: { 
                     theme_name: theme,
                     theme_component: componentName,

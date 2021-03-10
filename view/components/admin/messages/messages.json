@@ -1,16 +1,8 @@
 {
-    "metatags": {
-        "save": "Page metatags saved successfully."
-    },
-    "file": {
-        "save": "File saved successfully."       
-    },
+    "save": "Email saved successfully.",   
     "errors": {
-        "code": "Component html code file not exist",
-        "file": "Not valid file name",
-        "metatags": {
-            "save": "Can't save page metatags."
-        },
+        "code": "Email html code file not exist",
+        "email": "Not valid email name",       
         "theme_name": "Not valid theme name"
     }
 }

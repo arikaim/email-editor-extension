@@ -13,7 +13,7 @@ arikaim.component.onLoaded(function() {
     },function(error) {
         arikaim.page.loadContent({
             id: 'file_content',
-            component: "editor::admin.editor.edit.code.form.message"                       
+            component: "email::admin.editor.edit.code.form.message"                       
         });  
     });        
 }); 

@@ -1,12 +1,11 @@
 {%  set items = [ 
-        { id: 'editor_tab', title: labels.editor, icon: 'edit', component: 'editor::admin.editor', active: true },                 
-        { id: 'editor_pages_tab', title: labels.pages, component: 'editor::admin.pages', icon: 'file outline' },          
+        { id: 'email_editor_tab', title: labels.editor, icon: 'edit', component: 'email::admin.editor', active: true },                              
     ] 
 %}
 
 {{  component('components:tabs',{ 
         items: items,
-        menu: { component: 'system:admin.extensions.menu.actions', extension: 'editor' },
-        content: { component: 'editor::admin.editor' } 
+        menu: { extension: 'email' },
+        content: { component: 'email::admin.editor' } 
     })
 }}
