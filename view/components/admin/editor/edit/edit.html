@@ -8,11 +8,23 @@
         {{ labels.code }}     
     </div>      
 </div>     
-<div class="ui active tab" id="file_edit_content">                 
-    {{  component('email::admin.editor.edit.code',{ 
-            type: type,           
-            theme_component: component_name,
-            theme_name: theme_name
-        }) 
-    }}       
+<div class="ui active tab" id="file_edit_content" >    
+    <div class="ui two column grid">
+        <div class="column">             
+            {{  component('email::admin.editor.edit.code',{ 
+                    type: type,           
+                    theme_component: component_name,
+                    theme_name: theme_name
+                }) 
+            }} 
+        </div>
+        <div class="column">
+            {{  component('email::admin.editor.preview',{
+                    type: type,           
+                    theme_component: component_name,
+                    theme_name: theme_name
+                }) 
+            }}            
+        </div>  
+    </div>       
 </div> 

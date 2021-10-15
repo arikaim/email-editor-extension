@@ -14,7 +14,7 @@
         {% endif %}
         <div class="float-right">
             <div class="ui basic label">
-                <i class="icon blue email outline"></i>
+                <i class="icon blue envelope outline"></i>
                 {{ theme_component }}
             </div>
         </div>           
@@ -24,15 +24,21 @@
             <i class="icon blue folder outline"></i>
             ..{{ component_path|relativePath }}
         </div>
-    </div>
-    <div class="ui segment">
-    </div>
+    </div>   
 </div>
-<div class="">
-    {{  component('email::admin.editor.edit.code.form',{
-            theme: theme_name,
-            component_name: theme_component,
-            type: type
-        }) 
-    }}
+<div class="flex flex-col">
+    <div class="ui segment">          
+        <span class="font-bold py-2">{{ labels.subject }}</span>   
+        <div class="ui input fluid field">                        
+            <input type="text" value="" name="subject" id="subject">
+        </div>                                        
+    </div>
+    <div class="mt-2">
+        {{  component('email::admin.editor.edit.code.form',{
+                theme: theme_name,
+                component_name: theme_component,
+                type: type
+            }) 
+        }}
+    </div>
 </div>

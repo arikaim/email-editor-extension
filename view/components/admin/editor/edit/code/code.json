@@ -1,6 +1,8 @@
 {
     "labels": {
+        "subject": "Subject",
         "save": "Save",
+        "preview": "Preview",
         "demo": "Disabled in demo mode"
     }
 }
