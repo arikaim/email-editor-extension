@@ -5,7 +5,11 @@
                 <i class="icon sync"></i>               
             </button>
             <span class="px-2 font-bold">{{ title }}</span>
-        </h4>
-       
+        </h4>       
     </div>
+</div>
+<div class="w-full h-full border border-gray-300 border-solid rounded p-1">
+    {% set url = 'email/preview/' ~ theme_name ~ '/' ~ theme_component %}
+    <iframe class="w-full h-full" src="{{ url(url,true) }}" frameBorder="0">
+    </iframe>
 </div>

@@ -9,32 +9,33 @@
 function EmailEditorApi() {
     this.editor = null;
 
+    this.loadEmailSource = function(theme, componentName, onSuccess, onError)  {
+        return arikaim.get('/api/admin/email/source/' + theme + '/' + componentName,onSuccess,onError);
+    };
+
     this.loadEmailFile = function(theme, componentName, onSuccess, onError) {
         var data = {
             theme: theme,
             component: componentName        
         };
 
-        return arikaim.put('/api/email/admin/file/load',data,onSuccess,onError);
+        return arikaim.put('/api/admin/email/load',data,onSuccess,onError);
     };   
     
-    this.saveEmailFile = function(theme, componentName, content, onSuccess, onError) {    
+    this.saveEmailFile = function(theme, componentName, subject, content, onSuccess, onError) {    
         var data = {
             theme: theme,
             component: componentName,   
+            subject: subject,
             content: content    
         };
 
-        return arikaim.put('/api/email/admin/file/save',data,onSuccess,onError);
-    }; 
-
-    this.init = function() {
-        arikaim.ui.tab();        
-    };
+        return arikaim.post('/api/admin/email/save',data,onSuccess,onError);
+    };     
 }
 
 var emailEditorApi = new EmailEditorApi();
 
 arikaim.component.onLoaded(function() {
-    emailEditorApi.init();
+    arikaim.ui.tab();   
 });

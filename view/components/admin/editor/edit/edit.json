@@ -3,7 +3,7 @@
         "save": "Save",
         "edit": "Edit",
         "code": "Code",
-        "tags": "Meta Tags",
+        "source": "Source",       
         "demo": "Disabled in demo mode"
     }
 }

@@ -12,6 +12,12 @@
     </div>
     <div class="ui divider"></div>
 {% endif %}
+{% if components is not iterable or components|length == 0 %}
+<div class="ui message">
+    <i class="exclamation triangle blue big icon"></i>
+    {{ messages.empty }}
+</div>
+{% endif %}
 <div class="ui list relaxed divided {{ class }}">
     {% for file in components %}       
         {% set child_components = template.getEmails(file.full_name) %}  

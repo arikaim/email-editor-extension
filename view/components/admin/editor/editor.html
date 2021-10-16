@@ -1,8 +1,12 @@
+{% set selected_theme = getOption('email.editor.current.theme') %}
 <div class="ui segment">
     <span class="font-bold p-1">
         {{ labels.theme }}
     </span>       
-    {{ component('system:admin.templates.dropdown',{ skip: ['system'] }) }}
+    {{ component('system:admin.templates.dropdown',{ selected: selected_theme, skip: ['system'] }) }}
 </div>
-<div id="editor">        
+<div id="editor">     
+    {% if selected_theme is not empty %}  
+        {{ component('email::admin.editor.content',{ theme_name: selected_theme }) }}
+    {% endif %} 
 </div>

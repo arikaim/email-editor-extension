@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="{{ current_language|default('en') }}">
+    {% component 'components:head' type 'html' %}
+        {# Custom head content #}    
+    {% endcomponent %}
+    <body id="page">
+        {{ body|raw }}
+    </body>
+</html>

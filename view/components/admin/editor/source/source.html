@@ -1,0 +1,15 @@
+<div class="ui segment">   
+    <div class="ui basic label">
+        <i class="icon blue envelope outline"></i>
+        <span id="component_name">
+            {{ theme_component }}
+        </span>
+    </div>
+</div>
+<div id="email_source_content">
+    {% set mailView = service('email').render(theme_name ~ ':' ~ theme_component,[],current_language) %}
+    {{  component('semantic~code',{ 
+            content: mailView.getHtmlCode() 
+        }) 
+    }}
+</div>

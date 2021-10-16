@@ -26,6 +26,10 @@ function EmailEditor() {
                 emailEditorApi.editor.on('change',function(CodeMirror,changeObj) {
                     $('.save-file').removeClass('disabled');                   
                 }); 
+                // subject field
+                $('#subject').keypress(function() {                   
+                    $('.save-file').removeClass('disabled');                   
+                }); 
                 callFunction(onSuccess);          
             });
         });                              
@@ -47,7 +51,8 @@ function EmailEditor() {
     this.init = function() {
         $('#templates_dropdown').dropdown({
             onChange: function(name) {
-                self.loadEmailsEdit(name);                
+                self.loadEmailsEdit(name); 
+                options.save('email.editor.current.theme',name);               
             }
         });              
     };
@@ -58,7 +63,7 @@ function EmailEditor() {
             component: 'email::admin.editor.edit',
             params: { 
                 theme_name: theme,
-                component_name: componentName,
+                theme_component: componentName,
                 type: type
             }
         });

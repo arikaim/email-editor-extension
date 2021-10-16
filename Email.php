@@ -23,9 +23,14 @@ class Email extends Extension
     */
     public function install()
     {
+        // Preview Page
+        $this->addPageRoute('/email/preview/{theme}/{component}','EmailPreview','emailPreview','email::preview','session','email.preview');
         // Control Panel
-        $this->addApiRoute('PUT','/api/email/admin/file/load','EmailControlPanel','loadEmailFile','session'); 
-        $this->addApiRoute('PUT','/api/editor/admin/file/save','EmailControlPanel','saveEmailFile','session');   
+        $this->addApiRoute('PUT','/api/admin/email/load','EmailControlPanel','loadEmailFile','session'); 
+        $this->addApiRoute('POST','/api/admin/email/save','EmailControlPanel','saveEmailFile','session');   
+        $this->addApiRoute('GET','/api/admin/email/source/{theme}/{component}','EmailControlPanel','getEmailSource','session'); 
+        // Options
+        $this->createOption('email.editor.current.theme',null);   
     }
     
     /**

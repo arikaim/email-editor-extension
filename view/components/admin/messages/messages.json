@@ -1,8 +1,9 @@
 {
     "save": "Email saved successfully.",   
     "errors": {
-        "code": "Email html code file not exist",
-        "email": "Not valid email name",       
-        "theme_name": "Not valid theme name"
+        "save": "Error saving email content",
+        "code": "Email html code file not exist.",
+        "email": "Not valid email name.",       
+        "theme_name": "Not valid theme name."
     }
 }

@@ -1,30 +1,26 @@
 <div class="ui stackable tabular menu file-edit-tabs">   
     <div class="item active link edit-file-tab-item" 
-        component="email::admin.editor.edit.code" 
-        theme_component="{{ component_name }}" 
+        component="email::admin.editor.edit.tab" 
+        theme_component="{{ theme_component }}" 
         theme_name="{{ theme_name }}"
-        type="{{ type}}">
+        type="{{ type }}">
         <i class="icon code blue"></i>
         {{ labels.code }}     
+    </div>    
+    <div class="item link edit-file-tab-item" 
+        component="email::admin.editor.source" 
+        theme_component="{{ theme_component }}" 
+        theme_name="{{ theme_name }}"
+        type="{{ type }}">
+        <i class="icon file outline code blue"></i>
+        {{ labels.source }}     
     </div>      
 </div>     
-<div class="ui active tab" id="file_edit_content" >    
-    <div class="ui two column grid">
-        <div class="column">             
-            {{  component('email::admin.editor.edit.code',{ 
-                    type: type,           
-                    theme_component: component_name,
-                    theme_name: theme_name
-                }) 
-            }} 
-        </div>
-        <div class="column">
-            {{  component('email::admin.editor.preview',{
-                    type: type,           
-                    theme_component: component_name,
-                    theme_name: theme_name
-                }) 
-            }}            
-        </div>  
-    </div>       
+<div class="ui active tab" id="file_edit_content">    
+    {{  component('email::admin.editor.edit.tab',{
+            theme_component: theme_component,
+            theme_name: theme_name,
+            type: type
+        }) 
+    }}
 </div> 

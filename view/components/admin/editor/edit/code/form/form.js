@@ -5,6 +5,8 @@ arikaim.component.onLoaded(function() {
     var componentName = $('#component_name').val();
    
     emailEditorApi.loadEmailFile(theme,componentName,function(result) {          
+        $('#subject').val(result.subject);
+        
         emailEditor.loadCodeEditor(result.content,function() {        
             $('#code_loader').remove();
         });                     
