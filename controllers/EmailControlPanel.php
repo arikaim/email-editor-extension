@@ -52,7 +52,9 @@ class EmailControlPanel extends ControlPanelApiController
             $this
                 ->message('source')
                 ->field('theme',$theme)               
-                ->field('source',$code)                         
+                ->field('source',$code)     
+                ->field('library',$mailView->getLibraryName())
+                ->field('inlineCss',$mailView->inlineCssOption())              
                 ->field('component',$component);                                       
         },'errors.source');
     }

@@ -1,12 +1,22 @@
 {% set template = package('template').createPackage(theme_name) %}
 {% set component_path = template.getComponentPath(theme_component,'emails') %}
+{% set user = service('access').getUser() %}
 <div class="ui horizontal segments">
     <div class="ui segment">
         {% if demo_mode != true %}
-        <button class="ui green button mini circular save-file disabled">
-            <i class="icon check"></i>
-            {{ labels.save }}
-        </button>
+            <button class="ui green button mini circular save-file disabled">
+                <i class="icon check"></i>
+                {{ labels.save }}
+            </button>
+            {% if user.email is not empty %}
+            <button 
+                class="ui primary button mini circular send-test-email" 
+                theme="{{ theme_name }}"
+                component="{{ theme_component }}">
+                <i class="icon envelope outline"></i>
+                {{ labels.send }}
+            </button>
+            {% endif %}
         {% else %}
         <div class="ui warning message">
             {{ labels.demo }}

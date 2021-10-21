@@ -1,0 +1,8 @@
+{
+    "labels": {
+        "library": "Css Library",
+        "off": "Off",
+        "on": "On",
+        "inline": "Css Inliner"
+    }
+}

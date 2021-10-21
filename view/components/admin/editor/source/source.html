@@ -1,15 +1,47 @@
+{% set mail_view = service('email').render(theme_name ~ ':' ~ theme_component,[],current_language) %}
 <div class="ui segment">   
     <div class="ui basic label">
         <i class="icon blue envelope outline"></i>
-        <span id="component_name">
+        <span>
             {{ theme_component }}
         </span>
     </div>
+    {% if mail_view.getLibraryName() is not empty %}
+    <div class="ui basic label" title="{{ labels.library }}">
+        <i class="icon blue cubes"></i>
+        <span>
+            {{ mail_view.getLibraryName() }}
+        </span>
+    </div>
+    {% endif %}
+    <div class="ui basic label" title="{{ labels.library }}">
+        <i class="icon blue css3"></i>
+        <span clas="font-normal">
+            {{ labels.inline }}
+        </span>
+        <span class='font-bold text-blue-500 px-1'>
+            {{ (mail_view.inlineCssOption() == true) ? labels.on : labels.off }}
+        </span>
+    </div>
+    {% if mail_view.inlineCssOption() == true and mail_view.getCssInlinerClass() is not empty %}
+    <div class="ui basic label" title="{{ labels.library }}">
+        <i class="icon blue code"></i>      
+        <span class='font-bold '>
+            {{ mail_view.getCssInlinerClass() }}
+        </span>
+    </div>
+    {% endif %}
 </div>
 <div id="email_source_content">
-    {% set mailView = service('email').render(theme_name ~ ':' ~ theme_component,[],current_language) %}
+  
+
+    
+
     {{  component('semantic~code',{ 
-            content: mailView.getHtmlCode() 
+            content: mail_view.getHtmlCode() 
         }) 
     }}
+
+   
+
 </div>

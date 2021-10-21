@@ -2,6 +2,7 @@
     "labels": {
         "subject": "Subject",
         "save": "Save",
+        "send": "Send Test Email",
         "preview": "Preview",
         "demo": "Disabled in demo mode"
     }
