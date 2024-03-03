@@ -44,19 +44,15 @@ class EmailControlPanel extends ControlPanelApiController
         $component = $data->get('component');
         $language = $data->get('language',$this->getPageLanguage($data));
         $componentName = $theme . ':' . $component;
-       
         $mailView = $this->get('email')->render($componentName,[],$language);
-        
-        $this->setResponse(\is_object($mailView),function() use($theme,$component,$mailView) {      
-            $code = $mailView->getHtmlCode();                          
-            $this
-                ->message('source')
-                ->field('theme',$theme)               
-                ->field('source',$code)     
-                ->field('library',$mailView->getLibraryName())
-                ->field('inlineCss',$mailView->inlineCssOption())              
-                ->field('component',$component);                                       
-        },'errors.source');
+                                  
+        $this
+            ->message('source')
+            ->field('theme',$theme)               
+            ->field('source',$mailView->getHtmlCode())     
+            ->field('library',$mailView->getLibraryName())
+            ->field('inlineCss',$mailView->inlineCssOption())              
+            ->field('component',$component);                                       
     }
 
     /**
@@ -75,7 +71,7 @@ class EmailControlPanel extends ControlPanelApiController
 
         $packageManager = $this->get('packages')->create('template');
         $package = $packageManager->createPackage($theme);
-        if (\is_object($package) == false) {
+        if ($package == null) {
             $this->error('errors.theme_name');
             return false;
         }
@@ -96,15 +92,13 @@ class EmailControlPanel extends ControlPanelApiController
         }
         
         $fileContent = File::read($fileName);
-
-        $this->setResponse(true,function() use($theme,$component,$fileContent,$subject) {                                
-            $this
-                ->message('load')
-                ->field('theme',$theme)
-                ->field('subject',$subject)     
-                ->field('content',$fileContent)                         
-                ->field('component',$component);                                       
-        },'errors.load');
+                         
+        $this
+            ->message('load')
+            ->field('theme',$theme)
+            ->field('subject',$subject)     
+            ->field('content',$fileContent)                         
+            ->field('component',$component);                                             
     }
 
     /**
@@ -117,60 +111,59 @@ class EmailControlPanel extends ControlPanelApiController
     */
     public function saveEmailFileController($request, $response, $data) 
     {  
-        $this->onDataValid(function($data) {     
-            $theme = $data->get('theme');                     
-            $componentName = $data->get('component');
-            $component = \str_replace('_','.',$componentName);
-            $content = $data->get('content');
-            $language = $data->get('language',$this->getPageLanguage($data));
-            $subject = $data->get('subject');
-
-            $packageManager = $this->get('packages')->create('template');
-            $package = $packageManager->createPackage($theme);
-            if (\is_object($package) == false) {
-                $this->error('errors.theme_name');
-                return false;
-            }
-
-            $path = $package->getComponentPath($componentName,'emails');
-            $fileName = $path . DIRECTORY_SEPARATOR . $this->getComponentFileName($componentName);
-
-            if (File::exists($fileName) == false) {
-                $this->error('errors.file');
-                return false;
-            }
-            if (File::isWritable($fileName) == false) {
-                File::setWritable($fileName);
-            }
-            // email content
-            $result = File::write($fileName,$content);
-            if ($result == false) {
-                $this->error('errors.file');
-                return false;
-            }
-
-            // save email subject
-            $translation = $package->readTranslation($component,$language,'emails');
-            $translation = $package->setTranslationProperty($translation,'subject',$subject,'_');
-            $result = $package->saveTranslation($translation,$component,$language,'emails');           
-            if ($result == false) {
-                $fileName = $package->getTranslationFileName($component,$language,'emails');
-                if (File::isWritable($fileName) == false) {
-                    $this->error('errors.save');
-                    return false;
-                }
-            }
-
-            $this->setResponse($result,function() use($theme,$component) {                                
-                $this
-                    ->message('save')
-                    ->field('theme',$theme)                                
-                    ->field('component',$component);                                       
-            },'errors.save');
-        });
         $data
             ->addRule('text:min=2','theme')             
-            ->validate();   
+            ->validate(true);   
+
+        $theme = $data->get('theme');                     
+        $componentName = $data->get('component');
+        $component = \str_replace('_','.',$componentName);
+        $content = $data->get('content');
+        $language = $data->get('language',$this->getPageLanguage($data));
+        $subject = $data->get('subject');
+
+        $packageManager = $this->get('packages')->create('template');
+        $package = $packageManager->createPackage($theme);
+        if ($package == null) {
+            $this->error('errors.theme_name');
+            return false;
+        }
+
+        $path = $package->getComponentPath($componentName,'emails');
+        $fileName = $path . DIRECTORY_SEPARATOR . $this->getComponentFileName($componentName);
+
+        if (File::exists($fileName) == false) {
+            $this->error('errors.file');
+            return false;
+        }
+        if (File::isWritable($fileName) == false) {
+            File::setWritable($fileName);
+        }
+        // email content
+        $result = File::write($fileName,$content);
+        if ($result == false) {
+            $this->error('errors.file');
+            return false;
+        }
+
+        // save email subject
+        $translation = $package->readTranslation($component,$language,'emails');
+        $translation = $package->setTranslationProperty($translation,'subject',$subject,'_');
+        $result = $package->saveTranslation($translation,$component,$language,'emails');           
+        if ($result == false) {
+            $fileName = $package->getTranslationFileName($component,$language,'emails');
+            if (File::isWritable($fileName) == false) {
+                $this->error('errors.save');
+                return false;
+            }
+        }
+
+        $this->setResponse($result,function() use($theme,$component) {                                
+            $this
+                ->message('save')
+                ->field('theme',$theme)                                
+                ->field('component',$component);                                       
+        },'errors.save');
     }
 
     /**
@@ -181,8 +174,6 @@ class EmailControlPanel extends ControlPanelApiController
      */
     protected function getComponentFileName($componentName)
     {
-        $tokens = \explode('.',$componentName);
-
-        return \last($tokens) . '.html';
+        return \last(\explode('.',$componentName)) . '.html';
     }
 }

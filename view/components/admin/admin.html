@@ -1,10 +1,7 @@
-{%  set items = [ 
-        { id: 'email_editor_tab', title: labels.editor, icon: 'edit', component: 'email::admin.editor', active: true },                              
-    ] 
-%}
-
 {{  component('semantic~tabs',{ 
-        items: items,
+        items: [ 
+            { id: 'email_editor_tab', title: labels.editor, icon: 'edit', component: 'email::admin.editor', active: true },                              
+        ],
         menu: { extension: 'email' },
         content: { component: 'email::admin.editor' } 
     })
